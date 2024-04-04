@@ -2,6 +2,7 @@ package com.example.touchjumpadventures;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         helpButton = findViewById(R.id.Help);
         playButton = findViewById(R.id.Start);
         settingsButton = findViewById(R.id.Settings);
+        AppConstans.initialization(this.getApplicationContext());
     }
     public void StartGame(View view){
         helpButton.setOnClickListener(v -> {
@@ -36,5 +38,9 @@ public class MainActivity extends AppCompatActivity {
         settingsButton.setOnClickListener(v -> {
             Log.d("SettingsButton", "clicked");
         });
+
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
