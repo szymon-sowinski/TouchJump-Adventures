@@ -9,11 +9,15 @@ public class AppConstans {
     static BitmapBank bitmapbank;
     static GameEngine gameEngine;
     static int SCREEN_WIDTH, SCREEN_HEIGHT;
+    static int gravity;
+    static int  VELOCITY_WHEN_JUMPED;
 
     public static void initialization(Context context) {
         setScreenSize(context);
         bitmapbank = new BitmapBank(context.getResources());
         gameEngine = new GameEngine();
+        AppConstans.gravity = 3;
+        AppConstans.VELOCITY_WHEN_JUMPED = -40;
     }
 
     public static BitmapBank getBitmapbank() {

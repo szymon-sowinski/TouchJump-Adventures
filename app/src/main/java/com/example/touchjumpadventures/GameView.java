@@ -1,6 +1,7 @@
 package com.example.touchjumpadventures;
 
 import android.content.Context;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -62,5 +63,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         holder.addCallback(this);
         setFocusable(true);
         gameThread = new GameThread(holder);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        if(action == MotionEvent.ACTION_DOWN) {
+            AppConstans.getGameEngine().gameState = 1;
+            AppConstans.getGameEngine().square.setVelocity(AppConstans.VELOCITY_WHEN_JUMPED);
+        }
+        return true;
     }
 }
