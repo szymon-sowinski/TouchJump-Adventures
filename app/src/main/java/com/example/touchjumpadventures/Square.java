@@ -6,8 +6,8 @@ public class Square {
     private int squareX, squareY, currentFrame, velocity;
     public static int maxFrame;
     public Square(){
-        squareX = AppConstans.SCREEN_WIDTH/2 - AppConstans.getBitmapbank().getSquareWidth()/2;
-        squareY = AppConstans.SCREEN_HEIGHT/2 - AppConstans.getBitmapbank().getSquareHeight()/2;
+        squareX = AppConstants.SCREEN_WIDTH/2 - AppConstants.getBitmapBank().getSquareWidth()/2;
+        squareY = AppConstants.SCREEN_HEIGHT/2 - AppConstants.getBitmapBank().getSquareHeight()/2;
         currentFrame = 0;
         maxFrame = 1;
         velocity = 0;

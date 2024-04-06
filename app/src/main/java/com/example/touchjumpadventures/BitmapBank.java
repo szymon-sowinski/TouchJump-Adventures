@@ -16,7 +16,7 @@ public class BitmapBank {
     }
 
     public Bitmap getSquare(int frame){
-        return square[frame];
+        return square[frame = 0] ;
     }
 
     public int getSquareWidth(){
@@ -41,7 +41,7 @@ public class BitmapBank {
 
     public Bitmap scaleImage(Bitmap bitmap) {
         float widthHeightRatio = getBackgroundWidth() / getBackgroundHeight();
-        int backgroundScaledWidth = (int) widthHeightRatio * AppConstans.SCREEN_HEIGHT;
-        return Bitmap.createScaledBitmap(bitmap, backgroundScaledWidth, AppConstans.SCREEN_HEIGHT, false);
+        int backgroundScaledWidth = (int) widthHeightRatio * AppConstants.SCREEN_HEIGHT;
+        return Bitmap.createScaledBitmap(bitmap, backgroundScaledWidth, AppConstants.SCREEN_HEIGHT, false);
     }
 }

@@ -5,7 +5,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-public class AppConstans {
+public class AppConstants {
     static BitmapBank bitmapbank;
     static GameEngine gameEngine;
     static int SCREEN_WIDTH, SCREEN_HEIGHT;
@@ -16,11 +16,11 @@ public class AppConstans {
         setScreenSize(context);
         bitmapbank = new BitmapBank(context.getResources());
         gameEngine = new GameEngine();
-        AppConstans.gravity = 3;
-        AppConstans.VELOCITY_WHEN_JUMPED = -40;
+        AppConstants.gravity = 3;
+        AppConstants.VELOCITY_WHEN_JUMPED = -40;
     }
 
-    public static BitmapBank getBitmapbank() {
+    public static BitmapBank getBitmapBank() {
         return bitmapbank;
     }
 
@@ -35,7 +35,7 @@ public class AppConstans {
         display.getMetrics(metrics);
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
-        AppConstans.SCREEN_WIDTH = width;
-        AppConstans.SCREEN_HEIGHT = height;
+        AppConstants.SCREEN_WIDTH = width;
+        AppConstants.SCREEN_HEIGHT = height;
     }
 }

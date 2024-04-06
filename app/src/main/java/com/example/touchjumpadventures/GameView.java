@@ -54,7 +54,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
             }
         }
-
     }
 
     void initView()
@@ -69,8 +68,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
         if(action == MotionEvent.ACTION_DOWN) {
-            AppConstans.getGameEngine().gameState = 1;
-            AppConstans.getGameEngine().square.setVelocity(AppConstans.VELOCITY_WHEN_JUMPED);
+            AppConstants.getGameEngine().gameState = 1;
+            AppConstants.getGameEngine().square.setVelocity(AppConstants.VELOCITY_WHEN_JUMPED);
         }
         return true;
     }

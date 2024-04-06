@@ -24,20 +24,11 @@ public class MainActivity extends AppCompatActivity {
         helpButton = findViewById(R.id.Help);
         playButton = findViewById(R.id.Start);
         settingsButton = findViewById(R.id.Settings);
-        AppConstans.initialization(this.getApplicationContext());
+        AppConstants.initialization(this.getApplicationContext());
     }
-    public void StartGame(View view){
-        helpButton.setOnClickListener(v -> {
-            Log.d("HelpButton", "clicked");
-        });
 
-        playButton.setOnClickListener(v -> {
-            Log.d("PlayButton", "clicked");
-        });
-
-        settingsButton.setOnClickListener(v -> {
-            Log.d("SettingsButton", "clicked");
-        });
+    public void StartGame(View view) {
+        Log.d("PlayButton", "clicked");
 
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);

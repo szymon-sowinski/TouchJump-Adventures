@@ -6,37 +6,54 @@ public class GameEngine {
     BackgroundImage backgroundImage;
     Square square;
     static int gameState;
+    boolean isFalling = true;
+    boolean isJumping = false;
+    int targetY = 650;
+
     public GameEngine() {
         backgroundImage = new BackgroundImage();
         square = new Square();
         gameState = 0;
     }
-    public void updateAndDrawBackgroundImage(Canvas canvas) {
 
+    public void updateAndDrawBackgroundImage(Canvas canvas) {
         backgroundImage.setX(backgroundImage.getX() - backgroundImage.getVelocity());
-        if(backgroundImage.getX() < -AppConstans.getBitmapBank().getBackgroundWidth()){
+        if(backgroundImage.getX() < -AppConstants.getBitmapBank().getBackgroundWidth()){
             backgroundImage.setX(0);
         }
-        canvas.drawBitmap(AppConstans.getBitmapBank().getBackground(), backgroundImage.getX(), backgroundImage.getY(), null);
-        if(backgroundImage.getX() < -(AppConstans.getBitmapbank().getBackgroundWidth() - AppConstans.SCREEN_WIDTH)) {
-            canvas.drawBitmap(AppConstans.getBitmapbank().getBackground(), backgroundImage.getX() +
-                    AppConstans.getBitmapbank().getBackgroundWidth(), backgroundImage.getY(), null);
+        canvas.drawBitmap(AppConstants.getBitmapBank().getBackground(), backgroundImage.getX(), backgroundImage.getY(), null);
+        if(backgroundImage.getX() < -(AppConstants.getBitmapBank().getBackgroundWidth() - AppConstants.SCREEN_WIDTH)) {
+            canvas.drawBitmap(AppConstants.getBitmapBank().getBackground(), backgroundImage.getX() +
+                    AppConstants.getBitmapBank().getBackgroundWidth(), backgroundImage.getY(), null);
         }
     }
 
     public void updateAndDrawSquare(Canvas canvas) {
         if(gameState == 1) {
-        if(square.getY() < (AppConstans.SCREEN_HEIGHT - AppConstans.getBitmapBank().getSquareHeight()) || square.getVelocity() < 0) {
-            square.setVelocity(square.getVelocity() + AppConstans.gravity);
-            square.setY(square.getY() + square.getVelocity());
+            if(isFalling) {
+                if(square.getY() < (AppConstants.SCREEN_HEIGHT - AppConstants.getBitmapBank().getSquareHeight()) || square.getVelocity() < 0) {
+                    square.setVelocity(square.getVelocity() + AppConstants.gravity);
+                    square.setY(square.getY() + square.getVelocity());
+                }
+                if (square.getY() >= targetY) {
+                    square.setY(targetY);
+                    isFalling = false;
+                }
+            }
+        } else {
+            isFalling = true;
         }
-        }
+
         int currentFrame = square.getCurrentFrame();
-        canvas.drawBitmap (AppConstans.getBitmapbank().getSquare(currentFrame), square.getX(), square.getY(),  null);
+        canvas.drawBitmap(AppConstants.getBitmapBank().getSquare(currentFrame), square.getX(), square.getY(),  null);
         currentFrame++;
         if(currentFrame > square.maxFrame) {
-         currentFrame = 0;
+            currentFrame = 0;
         }
         square.setCurrentFrame(currentFrame);
+    }
+
+    public void startGame() {
+        gameState = 1;
     }
 }
