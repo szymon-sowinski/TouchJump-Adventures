@@ -2,22 +2,25 @@ package com.example.touchjumpadventures;
 
 public class Square {
 
-
     private int squareX, squareY, currentFrame, velocity;
     public static int maxFrame;
+
     public Square(){
-        squareX = AppConstants.SCREEN_WIDTH/4 - AppConstants.getBitmapBank().getSquareWidth()/2;
-        squareY = AppConstants.SCREEN_HEIGHT/2 - AppConstants.getBitmapBank().getSquareHeight()/4;
+        squareX = 0;
+        squareY = AppConstants.SCREEN_HEIGHT / 2 - AppConstants.getBitmapBank().getSquareHeight() / 4 + 150;
         currentFrame = 0;
         maxFrame = 1;
         velocity = 0;
     }
+
     public int getVelocity() {
         return velocity;
     }
+
     public void setVelocity(int velocity){
         this.velocity = velocity;
     }
+
     public int getCurrentFrame() {
         return currentFrame;
     }
@@ -41,5 +44,4 @@ public class Square {
     public void setY(int squareY) {
         this.squareY = squareY;
     }
-
 }
