@@ -6,7 +6,7 @@ public class GameEngine {
     BackgroundImage backgroundImage;
     Square square;
     static int gameState;
-    boolean isFalling = true;
+    boolean isFalling = false;
     boolean isJumping = false;
     int targetY = 650;
 
@@ -16,7 +16,7 @@ public class GameEngine {
         gameState = 0;
     }
 
-    public void updateAndDrawBackgroundImage(Canvas canvas) {
+    public void updateAndDrawBackgroundImage(Canvas canvas) {       //Background - probably
         backgroundImage.setX(backgroundImage.getX() - backgroundImage.getVelocity());
         if(backgroundImage.getX() < -AppConstants.getBitmapBank().getBackgroundWidth()){
             backgroundImage.setX(0);
@@ -28,7 +28,7 @@ public class GameEngine {
         }
     }
 
-    public void updateAndDrawSquare(Canvas canvas) {
+    public void updateAndDrawSquare(Canvas canvas) {        //Jumping - probably
         if(gameState == 1) {
             if(isFalling) {
                 if(square.getY() < (AppConstants.SCREEN_HEIGHT - AppConstants.getBitmapBank().getSquareHeight()) || square.getVelocity() < 0) {
@@ -37,7 +37,11 @@ public class GameEngine {
                 }
                 if (square.getY() >= targetY) {
                     square.setY(targetY);
-                    isFalling = false;
+                    isFalling = true;
+                }
+                if(gameState == 1) {
+
+
                 }
             }
         } else {

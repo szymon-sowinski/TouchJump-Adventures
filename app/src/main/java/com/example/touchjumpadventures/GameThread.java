@@ -9,7 +9,7 @@ public class GameThread extends Thread {
     SurfaceHolder surfaceHolder;
     boolean isRunning;
     long startTime, loopTime;
-    long DELAY = 33;
+    long DELAY = 20;
     public GameThread(SurfaceHolder surfaceHolder) {
         this.surfaceHolder = surfaceHolder;
         isRunning = true;
@@ -27,7 +27,7 @@ public class GameThread extends Thread {
                 }
             }
             loopTime = SystemClock.uptimeMillis() - startTime;
-            if(loopTime < DELAY){
+            if(loopTime <  DELAY){
                 try {
                     Thread.sleep(DELAY - loopTime);
                 } catch (InterruptedException e) {

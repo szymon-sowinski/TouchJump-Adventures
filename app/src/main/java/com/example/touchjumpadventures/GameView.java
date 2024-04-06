@@ -64,12 +64,21 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         gameThread = new GameThread(holder);
     }
 
+    private long lastClickTime = 0;
+    private static final long CLICK_DELAY = 900;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastClickTime < CLICK_DELAY) {
+            return true;
+        }
+
         int action = event.getAction();
-        if(action == MotionEvent.ACTION_DOWN) {
+        if (action == MotionEvent.ACTION_DOWN) {
             AppConstants.getGameEngine().gameState = 1;
-            AppConstants.getGameEngine().square.setVelocity(AppConstants.VELOCITY_WHEN_JUMPED);
+            AppConstants.getGameEngine().square.setVelocity(AppConstants.jumpVelocity);
+            lastClickTime = currentTime;
         }
         return true;
     }
