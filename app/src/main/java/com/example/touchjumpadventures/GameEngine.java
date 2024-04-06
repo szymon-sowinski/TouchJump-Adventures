@@ -16,15 +16,33 @@ public class GameEngine {
         gameState = 0;
     }
 
-    public void updateAndDrawBackgroundImage(Canvas canvas) {       //Background - probably
+    public void updateAndDrawBackgroundImage(Canvas canvas) {
+        // Przesunięcie tła w lewo na podstawie jego prędkości
         backgroundImage.setX(backgroundImage.getX() - backgroundImage.getVelocity());
-        if(backgroundImage.getX() < -AppConstants.getBitmapBank().getBackgroundWidth()){
-            backgroundImage.setX(0);
+
+        int backgroundWidth = AppConstants.getBitmapBank().getBackgroundWidth();
+
+        // Jeśli tło przesunęło się wystarczająco daleko w lewo, aby całkowicie zniknąć z ekranu
+        if (backgroundImage.getX() < -backgroundWidth) {
+            // Zresetuj pozycję tła, przesuwając je za ekran, po przeciwnej stronie
+            backgroundImage.setX(backgroundImage.getX() + backgroundWidth);
         }
-        canvas.drawBitmap(AppConstants.getBitmapBank().getBackground(), backgroundImage.getX(), backgroundImage.getY(), null);
-        if(backgroundImage.getX() < -(AppConstants.getBitmapBank().getBackgroundWidth() - AppConstants.SCREEN_WIDTH)) {
-            canvas.drawBitmap(AppConstants.getBitmapBank().getBackground(), backgroundImage.getX() +
-                    AppConstants.getBitmapBank().getBackgroundWidth(), backgroundImage.getY(), null);
+
+        // Pozycja X tła na ekranie (niezależnie od przesunięcia)
+        float drawX = backgroundImage.getX();
+
+        // Rysowanie tła w sposób ciągły, aby pokryć całą szerokość ekranu
+        while (drawX < AppConstants.SCREEN_WIDTH) {
+            // Rysuj tło na aktualnej pozycji drawX
+            canvas.drawBitmap(
+                    AppConstants.getBitmapBank().getBackground(),
+                    drawX,
+                    backgroundImage.getY(),
+                    null
+            );
+
+            // Przesuń drawX o szerokość tła, aby przygotować się do rysowania kolejnej kopii
+            drawX += backgroundWidth;
         }
     }
 
