@@ -2,6 +2,7 @@ package com.example.touchjumpadventures;
 
 import android.graphics.Canvas;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -76,51 +77,28 @@ public class GameEngine {
     }
 
     public void updateAndDrawStoneObstacle(Canvas canvas) {
-        // Pobierz szerokość tła
-        int backgroundWidth = AppConstants.getBitmapBank().getBackgroundWidth();
+        Iterator<StoneObstacle> iterator = obstacles.iterator();
+        while (iterator.hasNext()) {
+            StoneObstacle obstacle = iterator.next();
 
-        // Przechowuje pozycję X dla następnej przeszkody
-        int nextObstacleX = AppConstants.SCREEN_WIDTH;
+            int backgroundWidth = AppConstants.getBitmapBank().getBackgroundWidth();
 
-        // Lista do przechowywania przeszkód do usunięcia
-        List<StoneObstacle> obstaclesToRemove = new ArrayList<>();
-
-        // Przesuń każdą przeszkodę wraz z tłem
-        for (StoneObstacle obstacle : obstacles) {
-            // Oblicz nową pozycję przeszkody
-            int newX = (int) (obstacle.getX() - backgroundImage.getVelocity());
-
-            // Ustaw nową pozycję przeszkody
-            obstacle.setX(newX);
-
-            // Sprawdź czy przeszkoda wyszła poza lewą krawędź ekranu
             if (obstacle.getX() < -backgroundWidth) {
-                // Dodaj przeszkodę do listy do usunięcia
-                obstaclesToRemove.add(obstacle);
-            } else {
-                // Rysuj przeszkodę na aktualnej pozycji
-                canvas.drawBitmap(
-                        AppConstants.getBitmapBank().getStone(0),
-                        obstacle.getX(),
-                        obstacle.getY(),
-                        null
-                );
+                iterator.remove();
+                continue;
             }
 
-            // Sprawdź czy kolejna przeszkoda może zostać dodana
-            if (nextObstacleX <= AppConstants.SCREEN_WIDTH) {
-                // Dodaj nową przeszkodę
-                StoneObstacle newObstacle = new StoneObstacle();
-                newObstacle.setX(nextObstacleX);
-                obstacles.add(newObstacle);
+            float drawX = obstacle.getX();
 
-                // Zaktualizuj pozycję X dla następnej przeszkody
-                nextObstacleX += 20; // Przesunięcie o 20 w osi X
-            }
+            canvas.drawBitmap(
+                    AppConstants.getBitmapBank().getStone(0),
+                    drawX,
+                    obstacle.getY(),
+                    null
+            );
+
+            obstacle.setX((int) (obstacle.getX() - backgroundWidth));
         }
-
-        // Usuń przeszkody z listy do usunięcia
-        obstacles.removeAll(obstaclesToRemove);
     }
 
     public void generateObstacles() {
