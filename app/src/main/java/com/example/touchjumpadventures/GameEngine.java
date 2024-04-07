@@ -1,10 +1,15 @@
 package com.example.touchjumpadventures;
 
 import android.graphics.Canvas;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class GameEngine {
     BackgroundImage backgroundImage;
+    StoneObstacle stone;
     Square square;
+    ArrayList<StoneObstacle> obstacles;
     static int gameState;
     boolean isFalling = false;
     boolean isJumping = false;
@@ -13,27 +18,23 @@ public class GameEngine {
     public GameEngine() {
         backgroundImage = new BackgroundImage();
         square = new Square();
+        stone = new StoneObstacle();
+        obstacles = new ArrayList<>();
         gameState = 0;
     }
 
     public void updateAndDrawBackgroundImage(Canvas canvas) {
-        // Przesunięcie tła w lewo na podstawie jego prędkości
         backgroundImage.setX(backgroundImage.getX() - backgroundImage.getVelocity());
 
         int backgroundWidth = AppConstants.getBitmapBank().getBackgroundWidth();
 
-        // Jeśli tło przesunęło się wystarczająco daleko w lewo, aby całkowicie zniknąć z ekranu
         if (backgroundImage.getX() < -backgroundWidth) {
-            // Zresetuj pozycję tła, przesuwając je za ekran, po przeciwnej stronie
             backgroundImage.setX(backgroundImage.getX() + backgroundWidth);
         }
 
-        // Pozycja X tła na ekranie (niezależnie od przesunięcia)
         float drawX = backgroundImage.getX();
 
-        // Rysowanie tła w sposób ciągły, aby pokryć całą szerokość ekranu
         while (drawX < AppConstants.SCREEN_WIDTH) {
-            // Rysuj tło na aktualnej pozycji drawX
             canvas.drawBitmap(
                     AppConstants.getBitmapBank().getBackground(),
                     drawX,
@@ -41,12 +42,11 @@ public class GameEngine {
                     null
             );
 
-            // Przesuń drawX o szerokość tła, aby przygotować się do rysowania kolejnej kopii
             drawX += backgroundWidth;
         }
     }
 
-    public void updateAndDrawSquare(Canvas canvas) {        //Jumping - probably
+    public void updateAndDrawSquare(Canvas canvas) {
         if(gameState == 1) {
             if(isFalling) {
                 if(square.getY() < (AppConstants.SCREEN_HEIGHT - AppConstants.getBitmapBank().getSquareHeight()) || square.getVelocity() < 0) {
@@ -73,6 +73,66 @@ public class GameEngine {
             currentFrame = 0;
         }
         square.setCurrentFrame(currentFrame);
+    }
+
+    public void updateAndDrawStoneObstacle(Canvas canvas) {
+        // Pobierz szerokość tła
+        int backgroundWidth = AppConstants.getBitmapBank().getBackgroundWidth();
+
+        // Przechowuje pozycję X dla następnej przeszkody
+        int nextObstacleX = AppConstants.SCREEN_WIDTH;
+
+        // Lista do przechowywania przeszkód do usunięcia
+        List<StoneObstacle> obstaclesToRemove = new ArrayList<>();
+
+        // Przesuń każdą przeszkodę wraz z tłem
+        for (StoneObstacle obstacle : obstacles) {
+            // Oblicz nową pozycję przeszkody
+            int newX = (int) (obstacle.getX() - backgroundImage.getVelocity());
+
+            // Ustaw nową pozycję przeszkody
+            obstacle.setX(newX);
+
+            // Sprawdź czy przeszkoda wyszła poza lewą krawędź ekranu
+            if (obstacle.getX() < -backgroundWidth) {
+                // Dodaj przeszkodę do listy do usunięcia
+                obstaclesToRemove.add(obstacle);
+            } else {
+                // Rysuj przeszkodę na aktualnej pozycji
+                canvas.drawBitmap(
+                        AppConstants.getBitmapBank().getStone(0),
+                        obstacle.getX(),
+                        obstacle.getY(),
+                        null
+                );
+            }
+
+            // Sprawdź czy kolejna przeszkoda może zostać dodana
+            if (nextObstacleX <= AppConstants.SCREEN_WIDTH) {
+                // Dodaj nową przeszkodę
+                StoneObstacle newObstacle = new StoneObstacle();
+                newObstacle.setX(nextObstacleX);
+                obstacles.add(newObstacle);
+
+                // Zaktualizuj pozycję X dla następnej przeszkody
+                nextObstacleX += 20; // Przesunięcie o 20 w osi X
+            }
+        }
+
+        // Usuń przeszkody z listy do usunięcia
+        obstacles.removeAll(obstaclesToRemove);
+    }
+
+    public void generateObstacles() {
+        int numObstacles = new Random().nextInt(3) + 1;
+
+        int obstacleSpacing = AppConstants.SCREEN_WIDTH / numObstacles;
+
+        for (int i = 0; i < numObstacles; i++) {
+            StoneObstacle obstacle = new StoneObstacle();
+            obstacle.setX(AppConstants.SCREEN_WIDTH + i * obstacleSpacing);
+            obstacles.add(obstacle);
+        }
     }
 
     public void startGame() {

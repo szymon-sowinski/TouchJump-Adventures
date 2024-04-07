@@ -15,24 +15,30 @@ public class GameThread extends Thread {
         isRunning = true;
     }
     @Override
-    public void run(){
-        while(isRunning){
+    public void run() {
+        while (isRunning) {
             startTime = SystemClock.uptimeMillis();
             Canvas canvas = surfaceHolder.lockCanvas(null);
-            if(canvas != null){
-                synchronized (surfaceHolder){
+            if (canvas != null) {
+                synchronized (surfaceHolder) {
                     AppConstants.getGameEngine().updateAndDrawBackgroundImage(canvas);
                     AppConstants.getGameEngine().updateAndDrawSquare(canvas);
+                    AppConstants.getGameEngine().updateAndDrawStoneObstacle(canvas);
+
                     surfaceHolder.unlockCanvasAndPost(canvas);
                 }
             }
             loopTime = SystemClock.uptimeMillis() - startTime;
-            if(loopTime <  DELAY){
+            if (loopTime < DELAY) {
                 try {
                     Thread.sleep(DELAY - loopTime);
                 } catch (InterruptedException e) {
-                    Log.d("Interrupted", "Interupdated while sleeping");
+                    Log.d("Interrupted", "Interrupted while sleeping");
                 }
+            }
+
+            if (AppConstants.getGameEngine().gameState == 1) {
+                AppConstants.getGameEngine().generateObstacles();
             }
         }
     }
