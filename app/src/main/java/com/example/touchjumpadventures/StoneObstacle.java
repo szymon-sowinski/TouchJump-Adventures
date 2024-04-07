@@ -5,8 +5,8 @@ public class StoneObstacle {
     public static int maxFrame;
 
     public StoneObstacle(){
-        stoneX = 0;
-        stoneY = AppConstants.SCREEN_HEIGHT / 2 - AppConstants.getBitmapBank().getSquareHeight() / 2;
+        stoneX = 150;
+        stoneY = AppConstants.SCREEN_HEIGHT / 2 - AppConstants.getBitmapBank().getSquareHeight() / 4 + 250;
         currentFrame = 0;
         maxFrame = 1;
         velocity = 0;
