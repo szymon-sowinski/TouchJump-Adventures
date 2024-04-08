@@ -11,10 +11,6 @@ import android.view.View;
 import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
-
-    private ImageButton helpButton;
-    private ImageButton playButton;
-    private ImageButton settingsButton;
     public static Context context;
 
 
@@ -22,17 +18,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        helpButton = findViewById(R.id.Help);
-        playButton = findViewById(R.id.Start);
-        settingsButton = findViewById(R.id.Settings);
         AppConstants.initialization(this.getApplicationContext());
         context = this;
     }
 
     public void StartGame(View view) {
-        Log.d("PlayButton", "clicked");
-
         Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
         finish();
