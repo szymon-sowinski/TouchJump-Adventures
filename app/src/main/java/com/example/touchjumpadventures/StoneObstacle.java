@@ -48,19 +48,5 @@ public class StoneObstacle {
 
     public void update() {
         stoneX += -70;
-
-        if (stoneX < -AppConstants.getBitmapBank().getStoneWidth()) {
-//            stoneX = AppConstants.SCREEN_WIDTH;
-            stoneY = generateRandomYPosition();
-        }
-
-        if (stoneX > AppConstants.SCREEN_WIDTH) {
-//            stoneX = -AppConstants.getBitmapBank().getStoneWidth();
-            stoneY = generateRandomYPosition();
-        }
-    }
-
-    private int generateRandomYPosition() {
-        return new Random().nextInt(AppConstants.SCREEN_HEIGHT - AppConstants.getBitmapBank().getStoneHeight());
     }
 }

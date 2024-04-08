@@ -1,6 +1,7 @@
 package com.example.touchjumpadventures;
 
 import android.graphics.Canvas;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -48,9 +49,9 @@ public class GameEngine {
     }
 
     public void updateAndDrawSquare(Canvas canvas) {
-        if(gameState == 1) {
-            if(isFalling) {
-                if(square.getY() < (AppConstants.SCREEN_HEIGHT - AppConstants.getBitmapBank().getSquareHeight()) || square.getVelocity() < 0) {
+        if (gameState == 1) {
+            if (isFalling) {
+                if (square.getY() < (AppConstants.SCREEN_HEIGHT - AppConstants.getBitmapBank().getSquareHeight()) || square.getVelocity() < 0) {
                     square.setVelocity(square.getVelocity() + AppConstants.gravity);
                     square.setY(square.getY() + square.getVelocity());
                 }
@@ -58,7 +59,7 @@ public class GameEngine {
                     square.setY(targetY);
                     isFalling = true;
                 }
-                if(gameState == 1) {
+                if (gameState == 1) {
 
 
                 }
@@ -68,9 +69,9 @@ public class GameEngine {
         }
 
         int currentFrame = square.getCurrentFrame();
-        canvas.drawBitmap(AppConstants.getBitmapBank().getSquare(currentFrame), square.getX(), square.getY(),  null);
+        canvas.drawBitmap(AppConstants.getBitmapBank().getSquare(currentFrame), square.getX(), square.getY(), null);
         currentFrame++;
-        if(currentFrame > square.maxFrame) {
+        if (currentFrame > square.maxFrame) {
             currentFrame = 0;
         }
         square.setCurrentFrame(currentFrame);
@@ -103,18 +104,25 @@ public class GameEngine {
 
     public void generateObstacles() {
         int numObstacles = new Random().nextInt(3) + 1;
+        int obstacleSpacing = 1200;
 
-        int obstacleSpacing = AppConstants.SCREEN_WIDTH / numObstacles;
 
-        StoneObstacle obstacle = new StoneObstacle();
-        obstacle.setX(AppConstants.SCREEN_WIDTH);
-        obstacles.add(obstacle);
+        int minY = 0;
+        int maxY = AppConstants.SCREEN_HEIGHT / 2;
 
-//        for (int i = 0; i < numObstacles; i++) {
-//
-//        }
+        for (int i = 0; i < 100; i++) {
+            StoneObstacle obstacle = new StoneObstacle();
+
+            int randomY = new Random().nextInt(maxY - minY + 1) + minY;
+
+            obstacle.setX(AppConstants.SCREEN_WIDTH + i * obstacleSpacing);
+            obstacle.setY(randomY);
+            obstacles.add(obstacle);
+        }
     }
-   public void startGame() {
-      gameState = 1;
-  }
+
+
+    public void startGame() {
+        gameState = 1;
+    }
 }
