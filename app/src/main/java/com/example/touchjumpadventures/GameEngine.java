@@ -50,19 +50,18 @@ public class GameEngine {
 
     public void updateAndDrawSquare(Canvas canvas) {
         if (gameState == 1) {
-            if (isFalling) {
-                if (square.getY() < (AppConstants.SCREEN_HEIGHT - AppConstants.getBitmapBank().getSquareHeight()) || square.getVelocity() < 0) {
-                    square.setVelocity(square.getVelocity() + AppConstants.gravity);
-                    square.setY(square.getY() + square.getVelocity());
-                }
-                if (square.getY() >= targetY) {
-                    square.setY(targetY);
-                    isFalling = true;
-                }
-                if (gameState == 1) {
+            int bottomEdge = AppConstants.SCREEN_HEIGHT - AppConstants.getBitmapBank().getSquareHeight();
+            int newBottomPosition = bottomEdge - 220;
 
-
-                }
+            if (square.getY() < 0) {
+                square.setY(0);
+                square.setVelocity(0);
+            } else if (square.getY() > newBottomPosition) {
+                square.setY(newBottomPosition);
+                square.setVelocity(0);
+            } else {
+                square.setVelocity(square.getVelocity() + AppConstants.gravity);
+                square.setY(square.getY() + square.getVelocity());
             }
         } else {
             isFalling = true;
