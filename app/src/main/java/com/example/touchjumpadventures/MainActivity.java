@@ -11,19 +11,10 @@ import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageButton helpButton;
-    private ImageButton playButton;
-    private ImageButton settingsButton;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        helpButton = findViewById(R.id.Help);
-        playButton = findViewById(R.id.Start);
-        settingsButton = findViewById(R.id.Settings);
         AppConstants.initialization(this.getApplicationContext());
     }
 
