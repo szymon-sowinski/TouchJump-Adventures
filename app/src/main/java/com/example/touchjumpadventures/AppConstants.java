@@ -11,11 +11,15 @@ public class AppConstants {
     static int SCREEN_WIDTH, SCREEN_HEIGHT;
     static int gravity;
     static int  jumpVelocity;
+    public static GameActivity activity;
 
+    public static void setActivity(GameActivity activity) {
+        AppConstants.activity = activity;
+    }
     public static void initialization(Context context) {
         setScreenSize(context);
         bitmapbank = new BitmapBank(context.getResources());
-        gameEngine = new GameEngine();
+        gameEngine = new GameEngine(AppConstants.activity);
         AppConstants.gravity = 3;
         AppConstants.jumpVelocity = -40;
     }

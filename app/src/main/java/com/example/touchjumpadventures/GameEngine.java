@@ -1,6 +1,12 @@
 package com.example.touchjumpadventures;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Rect;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,13 +22,16 @@ public class GameEngine {
     boolean isFalling = false;
     boolean isJumping = false;
     int targetY = 650;
+    String message;
+    private Activity activity;
 
-    public GameEngine() {
+    public GameEngine(Activity activity) {
         backgroundImage = new BackgroundImage();
         square = new Square();
         stone = new StoneObstacle();
         obstacles = new ArrayList<>();
         gameState = 0;
+        this.activity = activity;
     }
 
     public void updateAndDrawBackgroundImage(Canvas canvas) {
@@ -59,9 +68,29 @@ public class GameEngine {
                     square.setY(targetY);
                     isFalling = true;
                 }
-                if (gameState == 1) {
 
+                Iterator<StoneObstacle> iterator = obstacles.iterator();
+                while (iterator.hasNext()) {
+                    StoneObstacle obstacle = iterator.next();
 
+                    Rect squareRect = new Rect(
+                            (int) square.getX(),
+                            (int) square.getY(),
+                            (int) (square.getX() + AppConstants.getBitmapBank().getSquareWidth()),
+                            (int) (square.getY() + AppConstants.getBitmapBank().getSquareHeight())
+                    );
+
+                    Rect obstacleRect = new Rect(
+                            (int) obstacle.getX(),
+                            (int) obstacle.getY(),
+                            (int) (obstacle.getX() + AppConstants.getBitmapBank().getStoneWidth()),
+                            (int) (obstacle.getY() + AppConstants.getBitmapBank().getStoneHeight())
+                    );
+
+                    if (Rect.intersects(squareRect, obstacleRect)) {
+                        gameState = 0;
+
+                    }
                 }
             }
         } else {
@@ -69,7 +98,7 @@ public class GameEngine {
         }
 
         int currentFrame = square.getCurrentFrame();
-        canvas.drawBitmap(AppConstants.getBitmapBank().getSquare(currentFrame), square.getX(), square.getY(), null);
+        canvas.drawBitmap(AppConstants.getBitmapBank().getSquare(currentFrame), square.getX(), square.getY(),  null);
         currentFrame++;
         if (currentFrame > square.maxFrame) {
             currentFrame = 0;
@@ -120,7 +149,6 @@ public class GameEngine {
             obstacles.add(obstacle);
         }
     }
-
 
     public void startGame() {
         gameState = 1;
