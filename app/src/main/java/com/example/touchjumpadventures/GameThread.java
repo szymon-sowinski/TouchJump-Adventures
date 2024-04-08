@@ -5,8 +5,10 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
+
 public class GameThread extends Thread {
     SurfaceHolder surfaceHolder;
+    public static boolean isPies = true;
     boolean isRunning;
     long startTime, loopTime;
     long DELAY = 20;
@@ -37,8 +39,9 @@ public class GameThread extends Thread {
                 }
             }
 
-            if (AppConstants.getGameEngine().gameState == 1) {
+            if (AppConstants.getGameEngine().gameState == 1 && isPies) {
                 AppConstants.getGameEngine().generateObstacles();
+                isPies = false;
             }
         }
     }

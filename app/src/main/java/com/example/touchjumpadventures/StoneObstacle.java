@@ -46,27 +46,21 @@ public class StoneObstacle {
         this.stoneY = stoneY;
     }
 
-    // Metoda do aktualizacji pozycji przeszkody na ekranie
     public void update() {
-        // Aktualizuj pozycję przeszkody na podstawie prędkości
-        stoneX += velocity;
+        stoneX += -70;
 
-        // Jeśli przeszkoda wychodzi poza lewą krawędź ekranu, przenieś ją na prawą stronę z nową losową pozycją Y
         if (stoneX < -AppConstants.getBitmapBank().getStoneWidth()) {
-            stoneX = AppConstants.SCREEN_WIDTH; // Przenieś na prawą stronę ekranu
-            stoneY = generateRandomYPosition(); // Ustaw nową losową pozycję Y
+//            stoneX = AppConstants.SCREEN_WIDTH;
+            stoneY = generateRandomYPosition();
         }
 
-        // Jeśli przeszkoda wychodzi poza prawą krawędź ekranu, przenieś ją na lewą stronę z nową losową pozycją Y
         if (stoneX > AppConstants.SCREEN_WIDTH) {
-            stoneX = -AppConstants.getBitmapBank().getStoneWidth(); // Przenieś na lewą stronę ekranu
-            stoneY = generateRandomYPosition(); // Ustaw nową losową pozycję Y
+//            stoneX = -AppConstants.getBitmapBank().getStoneWidth();
+            stoneY = generateRandomYPosition();
         }
     }
 
-    // Metoda do generowania losowej pozycji Y dla przeszkody
     private int generateRandomYPosition() {
-        // Generuj losową pozycję Y w zakresie od 0 do maksymalnej wysokości ekranu
         return new Random().nextInt(AppConstants.SCREEN_HEIGHT - AppConstants.getBitmapBank().getStoneHeight());
     }
 }

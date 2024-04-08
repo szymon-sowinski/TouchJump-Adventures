@@ -97,7 +97,7 @@ public class GameEngine {
                     null
             );
 
-            obstacle.setX((int) (obstacle.getX() - backgroundWidth));
+            obstacle.update();
         }
     }
 
@@ -106,14 +106,15 @@ public class GameEngine {
 
         int obstacleSpacing = AppConstants.SCREEN_WIDTH / numObstacles;
 
-        for (int i = 0; i < numObstacles; i++) {
-            StoneObstacle obstacle = new StoneObstacle();
-            obstacle.setX(AppConstants.SCREEN_WIDTH + i * obstacleSpacing);
-            obstacles.add(obstacle);
-        }
-    }
+        StoneObstacle obstacle = new StoneObstacle();
+        obstacle.setX(AppConstants.SCREEN_WIDTH);
+        obstacles.add(obstacle);
 
-    public void startGame() {
-        gameState = 1;
+//        for (int i = 0; i < numObstacles; i++) {
+//
+//        }
     }
+   public void startGame() {
+      gameState = 1;
+  }
 }
