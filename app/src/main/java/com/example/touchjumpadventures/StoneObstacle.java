@@ -1,6 +1,5 @@
 package com.example.touchjumpadventures;
 
-import java.util.Random;
 
 public class StoneObstacle {
     private int stoneX, stoneY, currentFrame, velocity;
@@ -13,23 +12,6 @@ public class StoneObstacle {
         maxFrame = 1;
         velocity = 0;
     }
-
-    public int getVelocity() {
-        return velocity;
-    }
-
-    public void setVelocity(int velocity) {
-        this.velocity = velocity;
-    }
-
-    public int getCurrentFrame() {
-        return currentFrame;
-    }
-
-    public void setCurrentFrame(int currentFrame) {
-        this.currentFrame = currentFrame;
-    }
-
     public int getX() {
         return stoneX;
     }

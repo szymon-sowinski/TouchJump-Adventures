@@ -7,7 +7,6 @@ public class BackgroundImage {
         backgroundImageY = 0;
         backgroundImageVelocity = 10;
     }
-
     public int getX(){
         return backgroundImageX;
     }

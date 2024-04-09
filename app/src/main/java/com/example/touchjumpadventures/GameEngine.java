@@ -1,16 +1,12 @@
 package com.example.touchjumpadventures;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-
-import com.google.android.material.snackbar.Snackbar;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 public class GameEngine {
@@ -89,7 +85,7 @@ public class GameEngine {
 
                     if (Rect.intersects(squareRect, obstacleRect)) {
                         gameState = 0;
-
+                        Log.d("Error", "Touched obstacle");
                     }
                 }
             }
@@ -130,7 +126,6 @@ public class GameEngine {
             obstacle.update();
         }
     }
-
     public void generateObstacles() {
         int numObstacles = new Random().nextInt(3) + 1;
         int obstacleSpacing = 1200;
@@ -148,9 +143,5 @@ public class GameEngine {
             obstacle.setY(randomY);
             obstacles.add(obstacle);
         }
-    }
-
-    public void startGame() {
-        gameState = 1;
     }
 }

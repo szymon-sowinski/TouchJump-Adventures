@@ -23,7 +23,6 @@ public class AppConstants {
         AppConstants.gravity = 3;
         AppConstants.jumpVelocity = -40;
     }
-
     public static BitmapBank getBitmapBank() {
         return bitmapbank;
     }

@@ -38,14 +38,12 @@ public class GameThread extends Thread {
                     Log.d("Interrupted", "Interrupted while sleeping");
                 }
             }
-
             if (AppConstants.getGameEngine().gameState == 1 && isPies) {
                 AppConstants.getGameEngine().generateObstacles();
                 isPies = false;
             }
         }
     }
-
     public boolean isRunning() {
         return isRunning;
     }

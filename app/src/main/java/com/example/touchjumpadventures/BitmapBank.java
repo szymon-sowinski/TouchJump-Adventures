@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 public class BitmapBank {
-
     Bitmap background;
     Bitmap[] stone;
     Bitmap[] square;
@@ -17,9 +16,7 @@ public class BitmapBank {
         square[0] = BitmapFactory.decodeResource(res, R.drawable.square);
         stone = new Bitmap[1];
         stone[0] = BitmapFactory.decodeResource(res, R.drawable.stone);
-
     }
-
     public Bitmap getSquare(int frame) {
         return square[frame = 0];
     }
@@ -49,7 +46,6 @@ public class BitmapBank {
         int backgroundScaledWidth = (int) widthHeightRatio * AppConstants.SCREEN_HEIGHT;
         return Bitmap.createScaledBitmap(bitmap, backgroundScaledWidth, AppConstants.SCREEN_HEIGHT, false);
     }
-
     public Bitmap getStone(int frame) {
         return stone[frame = 0];
     }
