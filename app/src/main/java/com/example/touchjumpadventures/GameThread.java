@@ -8,7 +8,7 @@ import android.view.SurfaceHolder;
 
 public class GameThread extends Thread {
     SurfaceHolder surfaceHolder;
-    public static boolean isPies = true;
+    public static boolean isTrue = true;
     boolean isRunning;
     long startTime, loopTime;
     long DELAY = 20;
@@ -38,9 +38,9 @@ public class GameThread extends Thread {
                     Log.d("Interrupted", "Interrupted while sleeping");
                 }
             }
-            if (AppConstants.getGameEngine().gameState == 1 && isPies) {
+            if (AppConstants.getGameEngine().gameState == 1 && isTrue) {
                 AppConstants.getGameEngine().generateObstacles();
-                isPies = false;
+                isTrue = false;
             }
         }
     }
