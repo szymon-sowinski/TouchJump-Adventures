@@ -2,7 +2,7 @@
 ## Wprowadzenie 
 TouchJump Adventures to prosta, ale wciągająca gra platformowa dla systemu Android. Gra oferuje dynamiczną rozgrywkę, w której gracz steruje skaczącym kwadratem, unikając przeszkód. Gra została stworzona z myślą o zapewnieniu zabawy i wyzwania dla graczy w różnym wieku.
 
-![Ekran główny aplikacji](app/src/main/res/drawable/homeScreen.jpg)
+![Ekran główny aplikacji](app/src/main/res/drawable/homescreen.jpg)
 
 ## Cel gry 
 Celem gry "TouchJump Adventures" jest unikanie przeszkód i przetrwanie jak najdłużej, wymagając od gracza szybkich reakcji i precyzyjnych skoków, aby uniknąć zderzenia i przejście jak najdalej. 
@@ -41,7 +41,7 @@ ImageButton o id Help:
 
 Ten układ interfejsu użytkownika zawiera podstawowe elementy potrzebne do rozpoczęcia gry: tytuł gry i przycisk rozpoczęcia. Używając ConstraintLayout, elementy są ustawione w sposób dynamiczny, co pozwala na elastyczne dostosowanie ich do różnych rozmiarów ekranu i orientacji urządzenia. 
   
-![Widok gry](app/src/main/res/drawable/gamePlay2.jpg)
+![Widok gry](app/src/main/res/drawable/gameplay2.jpg)
 
 
 ## Logika biznesowa aplikacji
