@@ -134,7 +134,7 @@ public class GameEngine {
         int minY = 0;
         int maxY = AppConstants.SCREEN_HEIGHT / 2;
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 200; i++) {
             StoneObstacle obstacle = new StoneObstacle();
 
             int randomY = new Random().nextInt(maxY - minY + 1) + minY;
