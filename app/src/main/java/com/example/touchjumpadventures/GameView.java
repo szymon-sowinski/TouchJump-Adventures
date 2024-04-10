@@ -64,7 +64,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     private long lastClickTime = 0;
-    private static final long CLICK_DELAY = 525;
+    private static final long CLICK_DELAY = 100;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
