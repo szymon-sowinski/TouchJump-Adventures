@@ -46,10 +46,12 @@ Ten układ interfejsu użytkownika zawiera podstawowe elementy potrzebne do rozp
 
 ## Logika biznesowa aplikacji
 ### AppConstants.java
+Plik AppConstants odpowiada za zarządzanie globalnymi ustawieniami, zasobami graficznymi oraz dostępem do elementów gry.
+
 W sekcji deklaracji zmiennych i stałych znajdują się:  
-- bitmapbank: Obiekt BitmapBank, który przechowuje zasoby graficzne gry.  
-- gameEngine: Obiekt GameEngine, odpowiedzialny za zarządzanie logiką gry.  
-- SCREEN_WIDTH i SCREEN_HEIGHT: Stałe przechowujące szerokość i wysokość ekranu.  
+- bitmapbank: Obiekt BitmapBank, który przechowuje zasoby graficzne gry, na przykład tekstury postaci czy tekstury przeszkód.
+- gameEngine: Obiekt GameEngine, odpowiedzialny za zarządzanie logiką gry, w tym zarządzanie stanem gry, interakcjami oraz renderowaniem.
+- SCREEN_WIDTH i SCREEN_HEIGHT: Stałe przechowujące szerokość i wysokość ekranu.
 - gravity: Stała przechowująca wartość grawitacji w grze.  
 - jumpVelocity: Stała przechowująca prędkość skoku postaci.  
 - activity: Referencja do GameActivity, głównej aktywności gry.
@@ -99,7 +101,7 @@ Klasa BitmapBank ma pole background, które przechowuje bitmapę tła gry, oraz 
 - Metody getStoneWidth() i getStoneHeight() zwracają szerokość i wysokość bitmapy kamienia z tablicy stone.
 
 ### GameActivity.java
-Plik GameActivity definiuje główną aktywność gry. Jest to klasa dziedzicząca po Activity z pakietu android.app. W klasie tej znajduje się pole gameView reprezentujące główny widok gry GameView. 
+Plik GameActivity definiuje główną aktywność gry, która tworzy i zarządza widokiem gry. 
 
 - Metoda onCreate() jest przesłoniętą metodą z klasy bazowej Activity, która jest wywoływana podczas tworzenia aktywności. W metodzie onCreate() najpierw wywoływana jest metoda bazowa super.onCreate(savedInstanceState),
   aby zainicjować domyślne zachowanie aktywności. Następnie tworzony jest nowy obiekt GameView przypisany do pola gameView za pomocą new GameView(this). Obiekt GameView jest odpowiedzialny za renderowanie i obsługę logiki gry.
